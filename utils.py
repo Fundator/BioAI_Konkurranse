@@ -30,12 +30,15 @@ def validate_route(route: List[int]):
     if len(route) != n_destinations:
         print(f"Antallet destinasjoner i ruten din {len(route)} er ikke det samme som antallet destinasjoner {n_destinations}")
         print(f"Følgende destinasjoner mangler: {set(range(n_destinations)) - set(route)}")
+        return False
     if len(set(route)) != n_destinations:
         print(f"Antallet *unike* destinasjoner i ruten din {len(set(route))} er ikke det samme som antallet destinasjoner {n_destinations}")
         dest_counter = Counter(route)
         print(f"Følgende destinasjoner forekommer mer enn en gang i ruten (vises på formen Counter(dict(destinasjon: antall, ...)): {Counter({k: c for k, c in dest_counter.items() if c > 1})}")    
+        return False
     assert np.max(route) == n_destinations - 1
     assert np.min(route) == 0
+    return True
 
 
 def init_population(pop_size: int) -> List[List[int]]:
