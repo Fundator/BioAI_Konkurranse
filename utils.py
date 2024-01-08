@@ -11,7 +11,7 @@ def load_distances(task: int) -> np.ndarray:
     global distances
     global n_destinations
 
-    distances = np.loadtxt(f'data/{tasks[task - 1]}.txt')
+    distances = np.loadtxt(f'BioAI_Konkurranse/data/{tasks[task - 1]}.txt')
     n_destinations = distances.shape[0]
 
     return distances
@@ -19,7 +19,8 @@ def load_distances(task: int) -> np.ndarray:
 
 def fitness_function(route: List[int]) -> float:
     route = list(route)
-    validate_route(route)
+    if not validate_route(route):
+        return float("inf")
 
     route_legs = [distances[stop1][stop2] for stop1, stop2 in zip(route, route[1:] + route[0:1])]
     return sum(route_legs)

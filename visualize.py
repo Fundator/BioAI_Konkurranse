@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from typing import List
 import numpy as np
-import random
 
 def visualize(route: List[int], task: int):
 
@@ -12,7 +11,7 @@ def visualize(route: List[int], task: int):
         return
 
     tasks = ["vanskelig", "veldig_vanskelig"]
-    destinations = list(np.loadtxt(f'data/xy/{tasks[task - 3]}.txt'))
+    destinations = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{tasks[task - 3]}.txt'))
 
     destinations = list(map(tuple, destinations))
     destination_nodes = [(xy, {"color": 'r', "pos": xy}) for xy in destinations]
