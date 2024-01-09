@@ -19,8 +19,7 @@ def load_distances(task: int) -> np.ndarray:
 
 def fitness_function(route: List[int]) -> float:
     route = list(route)
-    if not validate_route(route):
-        return float("inf")
+    validate_route(route)
 
     route_legs = [distances[stop1][stop2] for stop1, stop2 in zip(route, route[1:] + route[0:1])]
     return sum(route_legs)
@@ -28,17 +27,16 @@ def fitness_function(route: List[int]) -> float:
 
 def validate_route(route: List[int]):
     if len(route) != n_destinations:
-        print(f"Antallet destinasjoner i ruten din {len(route)} er ikke det samme som antallet destinasjoner {n_destinations}")
-        print(f"Følgende destinasjoner mangler: {set(range(n_destinations)) - set(route)}")
-        return False
+        context1 = f"Antallet destinasjoner i ruten din {len(route)} er ikke det samme som antallet destinasjoner {n_destinations}"
+        context2 = f"Følgende destinasjoner mangler: {set(range(n_destinations)) - set(route)}"
+        assert False, f"{context1}\n{context2}"
     if len(set(route)) != n_destinations:
-        print(f"Antallet *unike* destinasjoner i ruten din {len(set(route))} er ikke det samme som antallet destinasjoner {n_destinations}")
         dest_counter = Counter(route)
-        print(f"Følgende destinasjoner forekommer mer enn en gang i ruten (vises på formen Counter(dict(destinasjon: antall, ...)): {Counter({k: c for k, c in dest_counter.items() if c > 1})}")    
-        return False
+        context1 = f"Antallet *unike* destinasjoner i ruten din {len(set(route))} er ikke det samme som antallet destinasjoner {n_destinations}"
+        context2 = f"Følgende destinasjoner forekommer mer enn en gang i ruten (vises på formen Counter(dict(destinasjon: antall, ...)): {Counter({k: c for k, c in dest_counter.items() if c > 1})}"
+        assert False, f"{context1}\n{context2}"
     assert np.max(route) == n_destinations - 1
     assert np.min(route) == 0
-    return True
 
 
 def init_population(pop_size: int) -> List[List[int]]:
