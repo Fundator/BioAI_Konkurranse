@@ -50,7 +50,7 @@ def start_task(task: int,  pop_size: int, gens: int) -> Tuple[int, List[int]]:
     
     assert 0 < task <= len(tasks), f"Du må velge enten oppgave 1, 2, 3, eller 4, ikke {task}"
     assert pop_size % 2 == 0, "For enkelhetsskyld bruker man hovedsaklig partall i POP_SIZE. Legg til 1 på POP_SIZE og prøv igjen."
-    assert pop_size <= 500, "Maks størrelse på populasjonen er 500"
+    assert pop_size <= 400, "Maks størrelse på populasjonen er 500"
     assert gens <= 300, "Maks antall generasjoner er 300"
 
     load_distances(task)
