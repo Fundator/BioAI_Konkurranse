@@ -6,6 +6,8 @@ import random
 distances = None
 n_destinations = None
 
+round_trip = True # Use True unless you know what you are doing! False is not competition-ready
+
 tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig"]
 def load_distances(task: int) -> np.ndarray:
     global distances
@@ -19,10 +21,13 @@ def load_distances(task: int) -> np.ndarray:
 
 def fitness_function(route: List[int]) -> float:
     route = list(route)
-    validate_route(route)
-
+    if round_trip:
+        validate_route(route)
+    else:
+        # Add start and stop for non round_trip tasks
+        route = [0] + route + [n_destinations - 1]
     route_legs = [distances[stop1][stop2] for stop1, stop2 in zip(route, route[1:] + route[0:1])]
-    return sum(route_legs)
+    return sum(route_legs) if round_trip else sum(route_legs) - route_legs[-1]
 
 
 def validate_route(route: List[int]):
@@ -41,7 +46,12 @@ def validate_route(route: List[int]):
 
 def init_population(pop_size: int) -> List[List[int]]:
     global n_destinations
-    pop = [list(range(n_destinations)) for _ in range(pop_size)]
+    global round_trip
+    
+    if round_trip: 
+        pop = [list(range(n_destinations)) for _ in range(pop_size)]
+    else:
+        pop = [list(range(1, n_destinations - 1)) for _ in range(pop_size)]
     [random.shuffle(route) for route in pop]
 
     return pop
