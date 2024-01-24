@@ -28,8 +28,8 @@ def visualize(route: List[int], task: int, round_trip: bool):
 
 
     pos = nx.get_node_attributes(G, 'pos')
-    node_color = "red" if not round_trip else ["red"] + ["blue" for _ in range(n_destinations - 2)] + ["red"]
-    size = 75 if not round_trip else [100] + [75 for _ in range(n_destinations - 2)] + [100]
+    node_color = "red" if round_trip else ["red"] + ["blue" for _ in range(n_destinations - 2)] + ["red"]
+    size = 75 if round_trip else [100] + [75 for _ in range(n_destinations - 2)] + [100]
     
     nx.draw(G, pos, node_color=node_color,  node_size=size)
     
