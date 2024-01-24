@@ -11,20 +11,20 @@ def visualize(route: List[int], task: int, round_trip: bool):
         return
 
     tasks = ["vanskelig", "veldig_vanskelig"]
-    destinations = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{tasks[task - 3]}.txt'))
+    positions = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{tasks[task - 3]}.txt'))
 
-    n_destinations = len(destinations)
+    n_destinations = len(positions)
 
-    destinations = list(map(tuple, destinations))
-    destination_nodes = [(xy, {"color": 'r', "pos": xy}) for xy in destinations]
+    positions = list(map(tuple, positions))
+    destination_nodes = [(positions[dest], {"color": 'r', "pos": positions[dest]}) for dest in route]
 
     G = nx.Graph()
     G.add_nodes_from(destination_nodes)
 
     for i in range(0, len(route) - 1):
-        G.add_edge(destinations[route[i]], destinations[route[i + 1]])
+        G.add_edge(positions[route[i]], positions[route[i + 1]])
     if round_trip:
-        G.add_edge(destinations[route[-1]], destinations[route[0]])
+        G.add_edge(positions[route[-1]], positions[route[0]])
 
 
     pos = nx.get_node_attributes(G, 'pos')
