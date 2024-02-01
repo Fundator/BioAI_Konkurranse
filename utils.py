@@ -27,7 +27,7 @@ def fitness_function(route: List[int]) -> float:
     if not round_trip:
         # Add start and stop for non round_trip tasks
         route = [0] + route + [n_destinations - 1]
-    route_legs = [distances[stop1][stop2] for stop1, stop2 in zip(route, route[1:] + route[0:1])]
+    route_legs = [distances[route[idx]][route[(idx + 1) % n_destinations]] for idx in range(n_destinations)]
     return sum(route_legs) if round_trip else sum(route_legs) - route_legs[-1]
 
 
