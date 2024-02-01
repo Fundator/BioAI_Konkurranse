@@ -14,13 +14,13 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
     file_name = file_name if file_name != "" else f"{tasks[task - 3]}.txt"
 
 
-    positions = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}'))
+    positions = np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}')
     if invert_board:
         positions = -positions
 
     n_destinations = len(positions)
 
-    positions = list(map(tuple, positions))
+    positions = list(map(tuple, list(positions)))
 
     destination_nodes = [(positions[dest], {"color": 'r', "pos": positions[dest]}) for dest in route]
 
