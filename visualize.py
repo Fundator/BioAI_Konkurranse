@@ -16,7 +16,7 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
 
     positions = np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}')
     if invert_board:
-        positions = -positions
+        positions[:, 1] = -positions[:, 1]
 
     n_destinations = len(positions)
 
