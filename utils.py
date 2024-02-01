@@ -9,11 +9,13 @@ n_destinations = None
 round_trip = True # Use True unless you know what you are doing! False is not competition-ready
 
 tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig"]
-def load_distances(task: int) -> np.ndarray:
+def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
     global n_destinations
 
-    distances = np.loadtxt(f'BioAI_Konkurranse/data/{tasks[task - 1]}.txt')
+    file_name = file_name if file_name != "" else f"{tasks[task - 1]}.txt"
+
+    distances = np.loadtxt(f'BioAI_Konkurranse/data/{file_name}')
     n_destinations = distances.shape[0]
 
     return distances
@@ -48,7 +50,7 @@ def init_population(pop_size: int) -> List[List[int]]:
     global n_destinations
     global round_trip
     
-    if round_trip: 
+    if round_trip:
         pop = [list(range(n_destinations)) for _ in range(pop_size)]
     else:
         pop = [list(range(1, n_destinations - 1)) for _ in range(pop_size)]
@@ -67,3 +69,33 @@ def start_task(task: int,  pop_size: int, gens: int) -> Tuple[int, List[int]]:
     pop = init_population(pop_size)
 
     return n_destinations, pop
+
+
+if __name__ == "__main__":
+    import json
+    from sklearn.neighbors import NearestNeighbors
+    from pathlib import Path
+
+    json_file_name = Path("abakus_bedpres.json")
+    folder = Path("data/travelling_student")
+
+    with open(folder / json_file_name, "r") as f:
+        raw = json.load(f)
+        arr = raw["points"]
+
+
+        assert arr[0]["type"] == "source"
+        assert arr[-1]["type"] == "sink"
+
+        points = np.array(list([point["x"], point["y"]] for point in arr))
+
+        nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
+        distances, _ = nbrs.kneighbors(points)
+
+        xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
+        dist_path = Path("data") / json_file_name.with_suffix(".txt")
+
+        np.savetxt(xy_path, points, fmt="%.1f")
+        np.savetxt(dist_path, distances, fmt="%.3f")
+
+

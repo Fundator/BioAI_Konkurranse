@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from typing import List
 import numpy as np
 
-def visualize(route: List[int], task: int, round_trip: bool):
+def visualize(route: List[int], task: int, round_trip: bool, file_name: str = ""):
 
     try:
         import networkx as nx
@@ -11,7 +11,10 @@ def visualize(route: List[int], task: int, round_trip: bool):
         return
 
     tasks = ["vanskelig", "veldig_vanskelig"]
-    positions = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{tasks[task - 3]}.txt'))
+    file_name = file_name if file_name != "" else f"{tasks[task - 3]}.txt"
+
+
+    positions = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}'))
 
     n_destinations = len(positions)
 
