@@ -9,7 +9,7 @@ n_destinations = None
 round_trip = True # Use True unless you know what you are doing! False is not competition-ready
 
 
-tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig"]
+tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
 def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
     global n_destinations
