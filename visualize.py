@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from typing import List
 import numpy as np
 
-def visualize(route: List[int], task: int, round_trip: bool, file_name: str = ""):
+def visualize(route: List[int], task: int, round_trip: bool = True, file_name: str = "", invert_board: bool = False):
 
     try:
         import networkx as nx
@@ -15,10 +15,13 @@ def visualize(route: List[int], task: int, round_trip: bool, file_name: str = ""
 
 
     positions = list(np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}'))
+    if invert_board:
+        positions = -positions
 
     n_destinations = len(positions)
 
     positions = list(map(tuple, positions))
+
     destination_nodes = [(positions[dest], {"color": 'r', "pos": positions[dest]}) for dest in route]
 
     G = nx.Graph()
