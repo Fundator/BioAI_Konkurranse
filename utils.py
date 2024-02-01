@@ -93,7 +93,12 @@ if __name__ == "__main__":
         points = np.array(list([point["x"], point["y"]] for point in arr))
 
         nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
-        distances, _ = nbrs.kneighbors(points)
+
+
+        distances, neighbours = nbrs.kneighbors(points)
+
+        sorted_indices = np.argsort(neighbours, axis=1)
+        distances = np.take_along_axis(distances, sorted_indices, axis=1)
 
         xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
         dist_path = Path("data") / json_file_name.with_suffix(".txt")
