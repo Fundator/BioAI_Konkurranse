@@ -24,9 +24,7 @@ def load_distances(task: int, file_name: str = "") -> np.ndarray:
 
 def fitness_function(route: List[int]) -> float:
     route = list(route)
-    if round_trip:
-        validate_route(route)
-    else:
+    if not round_trip:
         # Add start and stop for non round_trip tasks
         route = [0] + route + [n_destinations - 1]
     route_legs = [distances[stop1][stop2] for stop1, stop2 in zip(route, route[1:] + route[0:1])]
