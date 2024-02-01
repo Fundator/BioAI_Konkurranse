@@ -8,6 +8,7 @@ n_destinations = None
 
 round_trip = True # Use True unless you know what you are doing! False is not competition-ready
 
+
 tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig"]
 def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
@@ -58,8 +59,10 @@ def init_population(pop_size: int) -> List[List[int]]:
 
     return pop
 
-def start_task(task: int,  pop_size: int, gens: int) -> Tuple[int, List[int]]:
-    
+def start_task(task: int,  pop_size: int, gens: int, is_round_trip: bool = True) -> Tuple[int, List[int]]:
+    global round_trip
+    round_trip = is_round_trip
+
     assert 0 < task <= len(tasks), f"Du må velge enten oppgave 1, 2, 3, eller 4, ikke {task}"
     assert pop_size % 2 == 0, "For enkelhetsskyld bruker man hovedsaklig partall i POP_SIZE. Legg til 1 på POP_SIZE og prøv igjen."
     assert pop_size <= 400, "Maks størrelse på populasjonen er 500"
@@ -82,7 +85,6 @@ if __name__ == "__main__":
     with open(folder / json_file_name, "r") as f:
         raw = json.load(f)
         arr = raw["points"]
-
 
         assert arr[0]["type"] == "source"
         assert arr[-1]["type"] == "sink"
