@@ -11,7 +11,7 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
         return
 
     tasks = ["lett", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
-    file_name = file_name if file_name != "" else f"{tasks[task] - 1}.txt"
+    file_name = file_name if file_name != "" else f"{tasks[task - 1]}.txt"
 
 
     positions = np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}')
