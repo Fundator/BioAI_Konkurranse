@@ -90,6 +90,10 @@ if __name__ == "__main__":
 
         points = np.array(list([point["x"], point["y"]] for point in arr))
 
+
+        # Invert y axis to make visualization same as scoreboard
+        points[:, 1] = -points[:, 1]
+
         nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
 
