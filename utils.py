@@ -72,16 +72,8 @@ def start_task(task: int,  pop_size: int, gens: int, file_name: str = "", is_rou
 
     return n_destinations, pop
 
-import math
-def to_xy(point):
-
-    r = 6371000  #radians of earth meters
-    lam,phi = point[0], point[1]
-    cos_phi_0 = np.cos(np.radians(phi))
 
 
-    return (r * np.radians(lam) * cos_phi_0,
-            r * np.radians(phi))
 if __name__ == "__main__":
     import json
     from sklearn.neighbors import NearestNeighbors
@@ -99,10 +91,9 @@ if __name__ == "__main__":
 
     points = np.loadtxt('data/travelling_student/lett.txt')
 
-    points = np.apply_along_axis(to_xy, 1, points)
-
     # Invert y axis to make visualization same as scoreboard
-    # points[:, 1] = -points[:, 1]
+    points[:, 1] = -points[:, 1]
+
 
     nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
@@ -115,7 +106,11 @@ if __name__ == "__main__":
     xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
     dist_path = Path("data") / json_file_name.with_suffix(".txt")
 
-    np.savetxt(xy_path, points / 100, fmt="%.1f")
+    points[:, 0] -= np.min(points[:, 0])
+
+    points[:, 1] -= np.min(points[:, 1])
+
+    np.savetxt(xy_path, points, fmt="%.1f")
     np.savetxt(dist_path, distances, fmt="%.3f")
 
 
