@@ -72,40 +72,50 @@ def start_task(task: int,  pop_size: int, gens: int, file_name: str = "", is_rou
 
     return n_destinations, pop
 
+import math
+def to_xy(point):
 
+    r = 6371000  #radians of earth meters
+    lam,phi = point[0], point[1]
+    cos_phi_0 = np.cos(np.radians(phi))
+
+
+    return (r * np.radians(lam) * cos_phi_0,
+            r * np.radians(phi))
 if __name__ == "__main__":
     import json
     from sklearn.neighbors import NearestNeighbors
     from pathlib import Path
 
-    json_file_name = Path("abakus_bedpres.json")
+    json_file_name = Path("lett.txt")
     folder = Path("data/travelling_student")
 
-    with open(folder / json_file_name, "r") as f:
-        raw = json.load(f)
-        arr = raw["points"]
+    # with open(folder / json_file_name, "r") as f:
+    #     raw = json.load(f)
+    #     arr = raw["points"]
 
-        assert arr[0]["type"] == "source"
-        assert arr[-1]["type"] == "sink"
+    #     assert arr[0]["type"] == "source"
+    #     assert arr[-1]["type"] == "sink"
 
-        points = np.array(list([point["x"], point["y"]] for point in arr))
+    points = np.loadtxt('data/travelling_student/lett.txt')
+
+    points = np.apply_along_axis(to_xy, 1, points)
+
+    # Invert y axis to make visualization same as scoreboard
+    # points[:, 1] = -points[:, 1]
+
+    nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
 
-        # Invert y axis to make visualization same as scoreboard
-        points[:, 1] = -points[:, 1]
+    distances, neighbours = nbrs.kneighbors(points)
 
-        nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
+    sorted_indices = np.argsort(neighbours, axis=1)
+    distances = np.take_along_axis(distances, sorted_indices, axis=1)
 
+    xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
+    dist_path = Path("data") / json_file_name.with_suffix(".txt")
 
-        distances, neighbours = nbrs.kneighbors(points)
-
-        sorted_indices = np.argsort(neighbours, axis=1)
-        distances = np.take_along_axis(distances, sorted_indices, axis=1)
-
-        xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
-        dist_path = Path("data") / json_file_name.with_suffix(".txt")
-
-        np.savetxt(xy_path, points, fmt="%.1f")
-        np.savetxt(dist_path, distances, fmt="%.3f")
+    np.savetxt(xy_path, points / 100, fmt="%.1f")
+    np.savetxt(dist_path, distances, fmt="%.3f")
 
 
