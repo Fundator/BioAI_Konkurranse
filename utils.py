@@ -9,7 +9,7 @@ n_destinations = None
 round_trip = True # Use True unless you know what you are doing! False is not competition-ready
 
 
-tasks = ["lett", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
+tasks = ["lett", "middels", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
 def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
     global n_destinations
@@ -73,44 +73,35 @@ def start_task(task: int,  pop_size: int, gens: int, file_name: str = "", is_rou
     return n_destinations, pop
 
 
-
 if __name__ == "__main__":
     import json
     from sklearn.neighbors import NearestNeighbors
     from pathlib import Path
 
-    json_file_name = Path("lett.txt")
+    json_file_name = Path("abakus_bedpres.json")
     folder = Path("data/travelling_student")
 
-    # with open(folder / json_file_name, "r") as f:
-    #     raw = json.load(f)
-    #     arr = raw["points"]
+    with open(folder / json_file_name, "r") as f:
+        raw = json.load(f)
+        arr = raw["points"]
 
-    #     assert arr[0]["type"] == "source"
-    #     assert arr[-1]["type"] == "sink"
+        assert arr[0]["type"] == "source"
+        assert arr[-1]["type"] == "sink"
 
-    points = np.loadtxt('data/travelling_student/lett.txt')
+        points = np.array(list([point["x"], point["y"]] for point in arr))
 
-    # Invert y axis to make visualization same as scoreboard
-    points[:, 1] = -points[:, 1]
-
-
-    nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
+        nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
 
-    distances, neighbours = nbrs.kneighbors(points)
+        distances, neighbours = nbrs.kneighbors(points)
 
-    sorted_indices = np.argsort(neighbours, axis=1)
-    distances = np.take_along_axis(distances, sorted_indices, axis=1)
+        sorted_indices = np.argsort(neighbours, axis=1)
+        distances = np.take_along_axis(distances, sorted_indices, axis=1)
 
-    xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
-    dist_path = Path("data") / json_file_name.with_suffix(".txt")
+        xy_path = Path("data/xy") / json_file_name.with_suffix(".txt")
+        dist_path = Path("data") / json_file_name.with_suffix(".txt")
 
-    points[:, 0] -= np.min(points[:, 0])
-
-    points[:, 1] -= np.min(points[:, 1])
-
-    np.savetxt(xy_path, points, fmt="%.1f")
-    np.savetxt(dist_path, distances, fmt="%.3f")
+        np.savetxt(xy_path, points, fmt="%.1f")
+        np.savetxt(dist_path, distances, fmt="%.3f")
 
 
