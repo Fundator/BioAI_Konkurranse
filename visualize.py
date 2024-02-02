@@ -10,8 +10,8 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
         print('pip install networkx dersom du ønsker å visualisere den beste reiseruten')
         return
 
-    tasks = ["vanskelig", "veldig_vanskelig", "abakus_bedpres"]
-    file_name = file_name if file_name != "" else f"{tasks[task - 3]}.txt"
+    tasks = ["lett", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
+    file_name = file_name if file_name != "" else f"{tasks[task]}.txt"
 
 
     positions = np.loadtxt(f'BioAI_Konkurranse/data/xy/{file_name}')
