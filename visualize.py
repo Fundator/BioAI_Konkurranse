@@ -38,6 +38,11 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
     size = 75 if round_trip else [100] + [75 for _ in range(n_destinations - 2)] + [100]
     
     nx.draw(G, pos, node_color=node_color,  node_size=size)
+
+    xmin, xmax = min(pos.values(), key=lambda x: x[0])[0], max(pos.values(), key=lambda x: x[0])[0]
+    ymin, ymax = min(pos.values(), key=lambda x: x[1])[1], max(pos.values(), key=lambda x: x[1])[1]
+    plt.xlim(xmin, xmax)
+    plt.ylim(ymin, ymax)
     
     plt.gcf()
     plt.show()
