@@ -119,6 +119,10 @@ def submit_solution(task: int, group_name: str, keyword: str, route: List[int]):
         print("Du må oppgi nøkkelordet du er tildelt før du kan levere løsnignen din.")
     else:
         response = requests.post(url=ENDPOINT, json={"group_name": group_name, "keyword": keyword, "route": route})
+        if response.status_code == 200:
+            print("Opplasting vellykket:")
+        else:
+            print("Opplasting FEILET med følgende melding:")
         print(response.text)
 
 
