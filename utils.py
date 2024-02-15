@@ -1,6 +1,7 @@
 import numpy as np
 from typing import List, Tuple
 from collections import Counter
+import requests
 import random
 
 distances = None
@@ -10,6 +11,8 @@ round_trip = True # Use True unless you know what you are doing! False is not co
 
 
 tasks = ["lett", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
+COMPETITION_TASK = 4 # ONE INDEXED!
+
 def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
     global n_destinations
@@ -103,5 +106,19 @@ if __name__ == "__main__":
 
         np.savetxt(xy_path, points, fmt="%.1f")
         np.savetxt(dist_path, distances, fmt="%.3f")
+
+
+ENDPOINT = "https://nodig-bioai-konk-backend.azurewebsites.net/api/putScore?code=XYTeqSwTJYy6SDaM8QsRl7JdpGzgYZIBRvwQmOtu2wvwAzFudWq19g=="
+def submit_solution(task: int, group_name: str, keyword: str, route: List[int]):
+    validate_route(route)
+    if task != COMPETITION_TASK:
+        print(f"Ingen opplasting er nødvendig for oppgave {task}")
+    elif group_name == "" or group_name == None:
+        print("Du må velge et gruppenavn før du kan levere løsningen din")
+    elif keyword == "" or keyword == None:
+        print("Du må oppgi nøkkelordet du er tildelt før du kan levere løsnignen din.")
+    else:
+        response = requests.post(url=ENDPOINT, json={"group_name": group_name, "keyword": keyword, "route": route})
+        print(response.text)
 
 
