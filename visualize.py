@@ -10,7 +10,7 @@ def visualize(route: List[int], task: int, round_trip: bool = True, file_name: s
         print('pip install networkx dersom du ønsker å visualisere den beste reiseruten')
         return
 
-    tasks = ["lett", "vanskelig", "veldig_vanskelig", "abakus_bedpres"]
+    tasks = ["lett", "vanskelig", "online"]
     file_name = file_name if file_name != "" else f"{tasks[task - 1]}.txt"
 
 
