@@ -1,7 +1,7 @@
 import numpy as np
 from typing import List, Tuple
 from collections import Counter
-import requests
+# import requests
 import random
 
 distances = None
@@ -38,7 +38,8 @@ def validate_route(route: List[int]):
     if len(route) != n_destinations:
         context1 = f"Antallet destinasjoner i ruten din ({len(route)}) er ikke det samme som antallet destinasjoner i oppgaven ({n_destinations})"
         context2 = f"Følgende destinasjoner mangler: {set(range(n_destinations)) - set(route)}"
-        assert False, f"{context1}\n{context2}"
+        context3 = f"Følgende destinasjoner er overflødige: {set(route) - set(range(n_destinations))}"
+        assert False, f"{context1}\n{context2}\n{context3}"
     if len(set(route)) != n_destinations:
         dest_counter = Counter(route)
         context1 = f"Antallet *unike* destinasjoner i ruten din ({len(set(route))}) er ikke det samme som antallet destinasjoner i oppgaven ({n_destinations})"
@@ -112,6 +113,7 @@ if __name__ == "__main__":
 
         nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
+        points[: , 1] = -points[:, 1]
 
         distances, neighbours = nbrs.kneighbors(points)
 
