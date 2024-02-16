@@ -11,7 +11,7 @@ round_trip = True # Use True unless you know what you are doing! False is not co
 
 
 tasks = ["lett", "vanskelig", "online"]
-COMPETITION_TASK = 4 # ONE INDEXED!
+COMPETITION_TASK = 3 # ONE INDEXED!
 
 def load_distances(task: int, file_name: str = "") -> np.ndarray:
     global distances
