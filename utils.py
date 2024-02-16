@@ -1,7 +1,7 @@
 import numpy as np
 from typing import List, Tuple
 from collections import Counter
-# import requests
+import requests
 import random
 
 distances = None
