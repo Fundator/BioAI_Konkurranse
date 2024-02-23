@@ -67,9 +67,9 @@ def start_task(task: int,  pop_size: int, gens: int, file_name: str = "", is_rou
 
     if file_name == "":
         assert 0 < task <= len(tasks), f"Du må velge enten oppgave {', '.join(map(str, range(1, len(tasks))))} eller {len(tasks)}, ikke {task}"
-    assert pop_size % 2 == 0, "For enkelhetsskyld bruker man hovedsaklig partall i POP_SIZE. Legg til 1 på POP_SIZE og prøv igjen."
-    assert pop_size <= 400, "Maks størrelse på populasjonen er 400"
-    assert gens <= 300, "Maks antall generasjoner er 300"
+    assert pop_size % 2 == 0, "For enkelhetsskyld bruker man partall i POP_SIZE. Legg til 1 på POP_SIZE og prøv igjen."
+    assert pop_size <= 300, "Maks størrelse på populasjonen er 300"
+    assert gens <= 200, "Maks antall generasjoner er 200"
 
     load_distances(task, file_name)
     pop = init_population(pop_size)
