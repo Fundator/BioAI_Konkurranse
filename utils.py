@@ -89,7 +89,7 @@ def submit_solution(task: int, group_name: str, keyword: str, route: List[int]):
         response = requests.post(url=ENDPOINT, json={"group_name": group_name, "keyword": keyword, "route": route})
         if response.status_code == 200:
             print("Opplasting vellykket:")
-            print(f"Score for denne ruten: {response.json["score"]} - Beste Score: {response.json["best_score"]}")
+            print(f"Score for denne ruten: {response.json['score']} - Beste Score: {response.json['best_score']}")
         else:
             print("Opplasting FEILET med følgende melding:")
             print(response.text)
