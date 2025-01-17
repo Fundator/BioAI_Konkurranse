@@ -1,8 +1,8 @@
 import numpy as np
 from typing import List, Tuple
 from collections import Counter
-import requests
-import random
+# import requests
+# import random
 
 distances = None
 n_destinations = None
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     from sklearn.neighbors import NearestNeighbors
     from pathlib import Path
 
-    json_file_name = Path("online.json")
+    json_file_name = Path("2025.json")
     folder = Path("data/travelling_student")
 
     with open(folder / json_file_name, "r") as f:
@@ -112,10 +112,10 @@ if __name__ == "__main__":
         assert arr[-1]["type"] == "sink"
 
         points = np.array(list([point["x"], point["y"]] for point in arr))
+        points[: , 1] = -points[:, 1]
 
         nbrs = NearestNeighbors(n_neighbors=len(points), algorithm='kd_tree').fit(points)
 
-        points[: , 1] = -points[:, 1]
 
         distances, neighbours = nbrs.kneighbors(points)
 

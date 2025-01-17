@@ -1,0 +1,58 @@
+{
+    "points": [
+        {"id": "2058833c-ce62-4d62-94eb-ea62f200a4af", "x": 1031, "y": 669, "type": "source"}, 
+        {"id": "047b1e7a-1efa-47a1-b8b8-5c2d53ec5fb8", "x": 172, "y": 241, "type": "node"}, 
+        {"id": "027b70e7-a627-43e7-b05b-f19ef7d65ff4", "x": 913, "y": 177, "type": "node"}, 
+        {"id": "a5f320a7-4c3d-4aa2-b416-29827663aebc", "x": 1320, "y": 624, "type": "node"}, 
+        {"id": "4d919437-4300-4f52-91c1-4c98b2d729a1", "x": 1136, "y": 37, "type": "node"}, 
+        {"id": "0ff104ba-d55c-4109-9e38-45b38d0400aa", "x": 437, "y": 775, "type": "node"}, 
+        {"id": "ff6df101-bb76-494a-ac16-844808ac99be", "x": 80, "y": 85, "type": "node"}, 
+        {"id": "c8695f05-cd93-47b8-8ce3-8142c08c37e4", "x": 848, "y": 814, "type": "node"}, 
+        {"id": "793244d0-d2fb-4c47-945e-221c1b081530", "x": 604, "y": 730, "type": "node"}, 
+        {"id": "68a832c6-9e20-4d90-a4ad-2ab208ed9687", "x": 1174, "y": 833, "type": "node"}, 
+        {"id": "519a6a12-6499-42de-b78a-57f94d3eea01", "x": 151, "y": 762, "type": "node"}, 
+        {"id": "b27d1be9-9346-4705-ae05-32aa21a0fa7f", "x": 806, "y": 994, "type": "node"}, 
+        {"id": "23496490-c7a2-467b-a28e-809d61303e97", "x": 1315, "y": 187, "type": "node"}, 
+        {"id": "1edc4e97-ff6e-4c05-ad2c-35cb687a8d93", "x": 1409, "y": 79, "type": "node"}, 
+        {"id": "43cb2cfc-9d88-4bf9-a9fa-22225b170288", "x": 311, "y": 252, "type": "node"}, 
+        {"id": "f91a3284-5ad6-47ff-827f-790282e2739d", "x": 101, "y": 583, "type": "node"}, 
+        {"id": "2e480a8d-67c5-45c6-9c01-04e9c45571ef", "x": 977, "y": 278, "type": "node"}, 
+        {"id": "29279209-b968-4f5d-b6ae-c59e26eda51c", "x": 72, "y": 408, "type": "node"}, 
+        {"id": "16ae38cd-9324-4e99-bcdd-fa7e63ee3178", "x": 28, "y": 745, "type": "node"}, 
+        {"id": "49b989fe-f45e-441b-9535-6ad0e5ee56ba", "x": 941, "y": 584, "type": "node"}, 
+        {"id": "ed72f305-ba01-46bd-b520-90f09ebb1be4", "x": 835, "y": 680, "type": "node"}, 
+        {"id": "8d52fd68-cab0-415d-92e2-1b4ad85c7640", "x": 960, "y": 983, "type": "node"}, 
+        {"id": "cb329724-e4db-4890-a813-31e36a48ea7f", "x": 404, "y": 390, "type": "node"}, 
+        {"id": "29e6cc53-d1e1-453b-a247-d6c1b0bba0a3", "x": 689, "y": 116, "type": "node"}, 
+        {"id": "6be16444-76fd-4cef-a31b-cf53f32b933c", "x": 435, "y": 947, "type": "node"}, 
+        {"id": "adb94f1a-5703-4292-aa64-591327ca97ac", "x": 511, "y": 650, "type": "node"}, 
+        {"id": "009b1c8e-0f65-415e-8d72-33b4ae313368", "x": 725, "y": 313, "type": "node"}, 
+        {"id": "fa06c2ea-388e-43c9-a21d-f9e61b6041da", "x": 423, "y": 180, "type": "node"}, 
+        {"id": "5694a2ef-994c-4502-8a78-86568bf2fd4f", "x": 336, "y": 791, "type": "node"}, 
+        {"id": "24902554-3968-46df-a5f9-de7a9adb6d43", "x": 1382, "y": 770, "type": "node"}, 
+        {"id": "f9366a08-3c05-47d0-9fda-63406bed1a0d", "x": 685, "y": 846, "type": "node"}, 
+        {"id": "7b4077a8-467f-4b92-a0b3-b73e1a30f584", "x": 612, "y": 995, "type": "node"}, 
+        {"id": "b69b2a59-363f-42dd-b940-db43c45b3330", "x": 1418, "y": 349, "type": "node"}, 
+        {"id": "48059a64-1ce6-4d78-8884-bd4198352211", "x": 16, "y": 320, "type": "node"}, 
+        {"id": "d8fea377-f2b3-4839-9ccf-969164b6b518", "x": 53, "y": 930, "type": "node"}, 
+        {"id": "36b3283a-f527-4cbd-b396-8997f4282841", "x": 1384, "y": 907, "type": "node"}, 
+        {"id": "189cf400-f9e3-4a5d-ae6e-c54de39e342d", "x": 832, "y": 554, "type": "node"}, 
+        {"id": "392d0e22-9679-4204-b91a-8d6f83cda629", "x": 706, "y": 684, "type": "node"}, 
+        {"id": "89a70039-9065-4ea7-9682-f18129b088cf", "x": 231, "y": 472, "type": "node"}, 
+        {"id": "c9bfc4bb-9bba-4a3e-8f40-f802b05dfc69", "x": 458, "y": 57, "type": "node"}, 
+        {"id": "cd83a5b6-4f24-4424-9cda-1aaadc674b98", "x": 1414, "y": 219, "type": "node"}, 
+        {"id": "ab8cb2ab-8c0a-4771-8454-ca784b1d2dfa", "x": 841, "y": 307, "type": "node"}, 
+        {"id": "f997b098-f7f9-4eac-874a-892db9bb5893", "x": 470, "y": 282, "type": "node"}, 
+        {"id": "fdbf88b7-26b4-4008-9640-ce398a443c3c", "x": 969, "y": 400, "type": "sink"}
+    ]
+}
+
+
+
+
+
+
+
+
+
+
